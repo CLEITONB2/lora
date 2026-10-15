@@ -1,0 +1,46 @@
+{
+  "last_node_id": 6,
+  "last_link_id": 6,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [100, 150],
+      "size": [315, 98],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [1]},
+        {"name": "CLIP", "type": "CLIP", "links": [2]},
+        {"name": "VAE", "type": "VAE", "links": [6]}
+      ],
+      "widgets_values": ["v1-5-pruned-emaonly.safetensors"]
+    },
+    {
+      "id": 2,
+      "type": "LoraLoader",
+      "pos": [450, 150],
+      "size": [315, 126],
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 1},
+        {"name": "clip", "type": "CLIP", "link": 2}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [3]},
+        {"name": "CLIP", "type": "CLIP", "links": [4]}
+      ],
+      "widgets_values": ["Kam&RaphozaKaori.safetensors", 0.8, 0.8]
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": [800, 100],
+      "size": [400, 200],
+      "inputs": [
+        {"name": "clip", "type": "CLIP", "link": 4}
+      ],
+      "outputs": [
+        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [5]}
+      ],
+      "widgets_values": ["Kam&RaphozaKaori, 1girl, masterpiece, best quality, highly detailed"]
+    }
+  ]
+}
